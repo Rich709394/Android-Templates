@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<template
+    format="5"
+    revision="5"
+    name="Create New Mvp Activity Or Fragment"
+    minApi="9"
+    minBuildApi="14"
+    description="Create New Mvp Activity Or Fragment">
+
+    <category value="Activity" />
+    <formfactor value="Mobile" />
+
+    <parameter
+        id="instantAppActivityHost"
+        name="Instant App URL Host"
+        type="string"
+        suggest="${companyDomain}"
+        default="instantapp.example.com"
+        visibility="isInstantApp!false"
+        help="The domain to use in the Instant App route for this activity"/>
+
+    <parameter
+        id="instantAppActivityRouteType"
+        name="Instant App URL Route Type"
+        type="enum"
+        default="pathPattern"
+        visibility="isInstantApp!false"
+        help="The type of route to use in the Instant App route for this activity" >
+        <option id="path">Path</option>
+        <option id="pathPrefix">Path Prefix</option>
+        <option id="pathPattern">Path Pattern</option>
+    </parameter>
+	<parameter
+        id="USER"
+        name="Input Your Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="李驰"
+        help="Use in file head"/>
+		
+	 <parameter
+        id="componentName"
+        name="Component Name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="My"
+        help="The name of input"/>
+
+    <parameter
+        id="instantAppActivityRoute"
+        name="Instant App URL Route"
+        type="string"
+        default="/.*"
+        visibility="isInstantApp!false"
+        help="The route to use in the Instant App route for this activity"/>
+
+    <parameter
+        id="activityClass"
+        name="Activity Name"
+        type="string"
+		suggest="${componentName}${contentType}"
+        constraints="class|unique|nonempty"
+        default="Mvp${contentType}"
+        help="The name of the activity class to create" />
+
+    <parameter
+        id="layoutName"
+        name="Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="${activityToLayout(activityClass)}"
+        default="activity_mvp"
+        help="The name of the layout to create for the activity" />
+
+
+   
+	<parameter
+        id="contentType"
+        name="Content Type"
+        type="enum"
+        default="Activity"
+        help="Create Activity Or Fragment" >
+        <option id="Activity">Create Activity</option>
+        <option id="Fragment">Create Fragment</option>
+	</parameter>
+	
+    <parameter
+        id="packageName"
+        name="Package name"
+        type="string"
+        constraints="package"
+        default="com.mycompany.myapp" />
+
+    <!-- 128x128 thumbnails relative to template.xml -->
+    <thumbs>
+        <!-- default thumbnail is required -->
+        <thumb>template_blank_activity.png</thumb>
+    </thumbs>
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>

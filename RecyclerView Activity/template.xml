@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<template
+    format="5"
+    revision="5"
+    name="RecyclerView Activity"
+    minApi="9"
+    minBuildApi="14"
+    description="Creates a new RecyclerView activity">
+
+    <category value="Activity" />
+    <formfactor value="Mobile" />
+
+
+    <parameter
+        id="componentName"
+        name="Component name"
+        type="string"
+        constraints="class|unique|nonempty"
+        default="My"
+        help="The name of file head "		/>
+		
+    <parameter
+        id="activityClass"
+        name="Activity Name"
+        type="string"
+		suggest="${componentName}${contentType}"
+        constraints="class|unique|nonempty"
+        default="Mvp${contentType}"
+        help="The name of the activity class to create" />
+
+    <parameter
+        id="layoutName"
+        name="Layout Name"
+        type="string"
+        constraints="layout|unique|nonempty"
+        suggest="${activityToLayout(activityClass)}"
+        default="activity_mvp"
+        help="The name of the layout to create for the activity" />
+
+    <parameter
+        id="isLauncher"
+        name="Launcher Activity"
+        type="boolean"
+        default="false"
+        help="If true, this activity will have a CATEGORY_LAUNCHER intent filter, making it visible in the launcher" />
+
+   
+
+		
+	<parameter
+        id="contentType"
+        name="Content Type"
+        type="enum"
+        default="Activity"
+        help="create Activity or Fragment" >
+        <option id="Activity">create Activity</option>
+        <option id="Fragment">create Fragment</option>
+   
+    </parameter>
+		
+    <parameter
+        id="packageName"
+        name="Package name"
+        type="string"
+        constraints="package"
+        default="com.mycompany.myapp" />
+
+    <!-- 128x128 thumbnails relative to template.xml -->
+    <thumbs>
+        <!-- default thumbnail is required -->
+        <thumb>template_blank_activity.png</thumb>
+    </thumbs>
+
+    <globals file="globals.xml.ftl" />
+    <execute file="recipe.xml.ftl" />
+
+</template>
